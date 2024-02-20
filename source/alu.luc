@@ -27,7 +27,7 @@ module alu (
     boolean.b = b;
     boolean.alufn_signal = alufn_signal;
     shifter.a = a;
-    shifter.b = b;
+    shifter.b = b[4:0];
     shifter.alufn_signal = alufn_signal;
     compare.z = adder.z;
     compare.v = adder.v;

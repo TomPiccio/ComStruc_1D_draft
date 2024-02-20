@@ -4,7 +4,6 @@ module boolean (
     input alufn_signal[6],
     output bool[32]
   ) {
-  var i;
   mux_4 muxs[32];
   always {
     // default values to silence errors 
