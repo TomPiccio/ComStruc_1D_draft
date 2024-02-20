@@ -52,11 +52,11 @@ module alu (
       b100001: out = shifter.shift; //RIGHT SHIFTER SHR
       b100011: out = shifter.shift; //RIGHT SHIFTER ARITHMETIC SRA
       b110011: out = compare.cmp; //COMPARE EQUAL CMPEQ
-      b000011: out = ~compare.cmp; //COMPARE NOT EQUAL CMPNEQ
+      b111011: out = ~compare.cmp; //COMPARE NOT EQUAL CMPNEQ
       b110101: out = compare.cmp; //COMPARE LESS THAN CMPLT
-      b100101: out = ~compare.cmp; //COMPARE GREATER THAN EQUAL CMPGE
+      b111101: out = ~compare.cmp; //COMPARE GREATER THAN EQUAL CMPGE
       b110111: out = compare.cmp; //COMPARE LESS THAN EQUAL CMPLE CMPLE
-      b100111: out = ~compare.cmp; //COMPARE GREATER THAN CMPGT
+      b111111: out = ~compare.cmp; //COMPARE GREATER THAN CMPGT
       default: out = 32x{0};
     }
     
