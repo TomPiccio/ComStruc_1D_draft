@@ -40,7 +40,7 @@ module alu (
       b00: out = alufn_signal[1] ? multiplier.mul: adder.out; //ADD or MULTIPLY
       b01: out = boolean.bool; //BOOLEAN
       b10: out = shifter.shift; //SHIFTER
-      b11: out = compare.cmp; //COMPARE
+      b11: out = alufn_signal[3] ? ~compare.cmp : compare.cmp; //COMPARE
       default: out = 32x{0};
     }
     
