@@ -7,12 +7,24 @@ module adder (
     output v,
     output n
   ) {
-
+  fa fa[32];
+  var i;
+  var v_1;
+  
   always {
     // default values to silence errors 
-    out = 0;
-    z = 0;
-    v = 0;
-    n = 0;
+    fa.a = a;
+    fa.b[0] = b^alufn_signal[0];
+    fa.ci[0] = alufn_signal[0];
+    
+    for (i=1; i<32; i++){ // define the connections for the other 31 units of fa 
+      fa.b[i] = b[i]^alufn_signal[0];
+      fa.ci[i] = fa.co[i-1];
+    }
+    out = fa.s;
+    z = ~|fa.s;
+    v_1 = alufn_signal[0]^b[31];
+    v = (v_1&a[31]&~fa.s[31])|((~v_1&~a[31])&fa.s[31]);
+    n = fa.s[31];
   }
 }

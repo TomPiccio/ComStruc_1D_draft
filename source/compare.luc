@@ -5,9 +5,15 @@ module compare (
     input alufn_signal[6],
     output cmp
   ) {
-
+  sig nxorv;
   always {
     // default values to silence errors 
-    cmp = 0;
+    nxorv = n^v;
+    case(alufn_signal[2:1]){
+      b01: cmp = z;
+      b10: cmp = nxorv;
+      b11: cmp = z|nxorv;
+      default: cmp = 0;
+    }
   }
 }
