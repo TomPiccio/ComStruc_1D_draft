@@ -35,28 +35,12 @@ module alu (
     compare.alufn_signal = alufn_signal;
     multiplier.a = a;
     multiplier.b = b;
-    
-    case(alufn_signal){
-      b000000: out = adder.out; //ADD
-      b000001: out = adder.out; //SUBTRACT
-      b000010: out = multiplier.mul; //MULTIPLY
-      b011000: out = boolean.bool; //AND
-      b011110: out = boolean.bool; //OR
-      b010110: out = boolean.bool; //XOR
-      b010111: out = boolean.bool; //NAND
-      b010001: out = boolean.bool; //NOR
-      b011001: out = boolean.bool; //XNOR
-      b011010: out = boolean.bool; //A
-      b011100: out = boolean.bool; //B
-      b100000: out = shifter.shift; //LEFT SHIFTER SHL
-      b100001: out = shifter.shift; //RIGHT SHIFTER SHR
-      b100011: out = shifter.shift; //RIGHT SHIFTER ARITHMETIC SRA
-      b110011: out = compare.cmp; //COMPARE EQUAL CMPEQ
-      b111011: out = ~compare.cmp; //COMPARE NOT EQUAL CMPNEQ
-      b110101: out = compare.cmp; //COMPARE LESS THAN CMPLT
-      b111101: out = ~compare.cmp; //COMPARE GREATER THAN EQUAL CMPGE
-      b110111: out = compare.cmp; //COMPARE LESS THAN EQUAL CMPLE CMPLE
-      b111111: out = ~compare.cmp; //COMPARE GREATER THAN CMPGT
+           
+    case(alufn_signal[5:4]){
+      b00: out = alufn_signal[1] ? multiplier.mul: adder.out; //ADD or MULTIPLY
+      b01: out = boolean.bool; //BOOLEAN
+      b10: out = shifter.shift; //SHIFTER
+      b11: out = compare.cmp; //COMPARE
       default: out = 32x{0};
     }
     

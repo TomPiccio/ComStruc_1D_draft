@@ -10,9 +10,9 @@ module compare (
     // default values to silence errors 
     nxorv = n^v;
     case(alufn_signal[2:1]){
-      b01: cmp = z;
-      b10: cmp = nxorv;
-      b11: cmp = z|nxorv;
+      b01: cmp = alufn_signal[3]? ~z : z;
+      b10: cmp = alufn_signal[3]? ~nxorv : nxorv;
+      b11: cmp = alufn_signal[3]? ~(z|nxorv) : (z|nxorv);
       default: cmp = 0;
     }
   }
