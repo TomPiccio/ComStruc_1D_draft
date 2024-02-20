@@ -4,9 +4,13 @@ module boolean (
     input alufn_signal[6],
     output bool[32]
   ) {
-
+  var i;
+  mux_4 muxs[32];
   always {
     // default values to silence errors 
-    bool = 0;
+    muxs.in = 32x{{alufn_signal[3:0]}};
+    muxs.s0 = a;
+    muxs.s1 = b;
+    bool = muxs.out;
   }
 }

@@ -15,27 +15,49 @@ module alu (
   
   always {
     // default values to silence errors 
-    z = 0;
-    v = 0;
-    n = 0;
-    out = 0;
-    adder.a = 0;
-    adder.b = 0;
-    adder.alufn_signal = 0;
-    boolean.a = 0;
-    boolean.b = 0;
-    boolean.alufn_signal = 0;
-    shifter.a = 0;
-    shifter.b = 0;
-    shifter.alufn_signal = 0;
-    compare.z = 0;
-    compare.v = 0;
-    compare.n = 0;
-    compare.alufn_signal = 0;
-    multiplier.a = 0;
-    multiplier.b = 0;
     
-    // YOUR ANSWER HERE 
+    
+    adder.a = a;
+    adder.b = a;
+    z = adder.z;
+    v = adder.v;
+    n = adder.n;
+    adder.alufn_signal = alufn_signal;
+    boolean.a = a;
+    boolean.b = b;
+    boolean.alufn_signal = alufn_signal;
+    shifter.a = a;
+    shifter.b = b;
+    shifter.alufn_signal = alufn_signal;
+    compare.z = adder.z;
+    compare.v = adder.v;
+    compare.n = adder.n;
+    compare.alufn_signal = alufn_signal;
+    multiplier.a = a;
+    multiplier.b = b;
+    
+    case(alufn_signal){
+      b000000: out = adder.out; //ADD
+      b000001: out = adder.out; //SUBTRACT
+      b000010: out = multiplier.mul; //MULTIPLY
+      b011000: out = boolean.bool; //AND
+      b011110: out = boolean.bool; //OR
+      b010110: out = boolean.bool; //XOR
+      b010111: out = boolean.bool; //NAND
+      b010001: out = boolean.bool; //NOR
+      b011001: out = boolean.bool; //XNOR
+      b011010: out = boolean.bool; //A
+      b010101: out = boolean.bool; //B
+      b100000: out = shifter.shift; //LEFT SHIFTER SHL
+      b100001: out = shifter.shift; //RIGHT SHIFTER SHR
+      b100011: out = shifter.shift; //RIGHT SHIFTER ARITHMETIC SRA
+      b110011: out = compare.cmp; //COMPARE EQUAL CMPEQ
+      b110101: out = compare.cmp; //COMPARE LESS THAN CMPLT
+      b110100: out = ~compare.cmp; //COMPARE GREATER THAN EQUAL CMPGE
+      b110111: out = compare.cmp; //COMPARE LESS THAN EQUAL CMPLE CMPLE
+      b110110: out = ~compare.cmp; //COMPARE GREATER THAN CMPGT
+      default: out = 32x{0};
+    }
     
   }
 }
