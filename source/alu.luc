@@ -47,15 +47,16 @@ module alu (
       b010001: out = boolean.bool; //NOR
       b011001: out = boolean.bool; //XNOR
       b011010: out = boolean.bool; //A
-      b010101: out = boolean.bool; //B
+      b011100: out = boolean.bool; //B
       b100000: out = shifter.shift; //LEFT SHIFTER SHL
       b100001: out = shifter.shift; //RIGHT SHIFTER SHR
       b100011: out = shifter.shift; //RIGHT SHIFTER ARITHMETIC SRA
       b110011: out = compare.cmp; //COMPARE EQUAL CMPEQ
+      b000011: out = ~compare.cmp; //COMPARE NOT EQUAL CMPNEQ
       b110101: out = compare.cmp; //COMPARE LESS THAN CMPLT
-      b110100: out = ~compare.cmp; //COMPARE GREATER THAN EQUAL CMPGE
+      b100101: out = ~compare.cmp; //COMPARE GREATER THAN EQUAL CMPGE
       b110111: out = compare.cmp; //COMPARE LESS THAN EQUAL CMPLE CMPLE
-      b110110: out = ~compare.cmp; //COMPARE GREATER THAN CMPGT
+      b100111: out = ~compare.cmp; //COMPARE GREATER THAN CMPGT
       default: out = 32x{0};
     }
     
